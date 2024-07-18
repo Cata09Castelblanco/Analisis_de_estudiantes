@@ -71,6 +71,50 @@ Estas observaciones son consistentes con los resultados del ANOVA, que mostraron
 </p>
 
 
+## Modelos de Machine Learning
+
+Para evaluar el rendimiento académico de los estudiantes y realizar predicciones sobre sus calificaciones finales, se implementaron dos modelos de machine learning: un modelo de regresión lineal y un modelo de Random Forest. A continuación, se detallan los resultados obtenidos con cada uno de ellos.
+
+
+- **`Modelo de Regresión Lineal`**
+
+El modelo de regresión lineal se utilizó como una línea base para comparar la precisión de las predicciones. Los resultados obtenidos fueron los siguientes:
+
+Error Cuadrático Medio (*MSE*): 1.3803661366243358
+
+Coeficiente de Determinación (*R2 Score*): 0.5358952423479946
+
+Estos resultados indican que el modelo de regresión lineal explica aproximadamente el 53.59% de la variabilidad en las calificaciones finales de los estudiantes.
+
+- **`Modelo de Random Forest`**
+
+Para mejorar las predicciones, se implementó un modelo de Random Forest con ajuste de hiperparámetros utilizando una búsqueda en cuadrícula (Grid Search). Los parámetros ajustados fueron los siguientes:
+```
+param_grid = {
+    'n_estimators': [100, 200, 300],
+    'max_depth': [10, 20, 30, None],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+```
+El modelo se evaluó utilizando validación cruzada (cross-validation) con 10 particiones (folds). Los resultados fueron:
+
+Average R2 Score with cross-validation: 0.32777711302920187
+Después de entrenar el mejor modelo encontrado por la búsqueda en cuadrícula, los resultados finales sobre el conjunto de prueba fueron:
+
+Random Forest MSE: 0.7767863753794975
+Random Forest R2 Score: 0.7388299792875942
+Estos resultados muestran que el modelo de Random Forest mejoró significativamente la precisión de las predicciones en comparación con el modelo de regresión lineal, explicando aproximadamente el 73.88% de la variabilidad en las calificaciones finales.
+
+# Resumen:
+
+
+Modelo de Regresión Lineal: Aunque es un modelo simple y fácil de interpretar, la regresión lineal explicó sólo el 53.59% de la variabilidad en las calificaciones finales, lo que sugiere que no captura todas las complejidades de los datos.
+
+Modelo de Random Forest: Este modelo mostró una mejora significativa, explicando el 73.88% de la variabilidad en las calificaciones finales. La validación cruzada también indicó una consistencia en el rendimiento del modelo con un R2 promedio de 0.327.
+
+Importancia de la Calidad de los Datos: La calidad y la completitud de los datos juegan un papel crucial en la precisión de los modelos de machine learning. La presencia de datos nulos y errores en las variables categóricas afecta negativamente los resultados.
+
 ## Conclusiones y Recomendaciones
 
 ### Conclusiones
